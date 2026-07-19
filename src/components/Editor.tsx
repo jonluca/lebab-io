@@ -25,6 +25,7 @@ const style = {
   minWidth: "47vw",
   padding: 5,
 };
+const STORAGE_KEY = "code";
 const BaseEditor = (props: IAceEditorProps) => {
   return (
     <AceEditor
@@ -44,6 +45,7 @@ const BaseEditor = (props: IAceEditorProps) => {
 };
 const CodeEditor = () => {
   const [code, setCode] = useState(INIT_CODE);
+  const [storageLoaded, setStorageLoaded] = useState(false);
   const [transpiled, setTranspiled] = useState<ITranspiled>({ code: "", warnings: [] });
   const debouncedOnChange = useDebouncedCallback(
     // function
@@ -54,6 +56,18 @@ const CodeEditor = () => {
     200,
   );
   useEffect(() => {
+    const storedCode = window.localStorage.getItem(STORAGE_KEY);
+    if (storedCode !== null) {
+      setCode(storedCode);
+    }
+    setStorageLoaded(true);
+  }, []);
+  useEffect(() => {
+    if (!storageLoaded) {
+      return;
+    }
+
+    window.localStorage.setItem(STORAGE_KEY, code);
     setTranspiled(() => {
       try {
         const newCode = lebab.transform(code, [
@@ -81,7 +95,7 @@ const CodeEditor = () => {
         return { code: `ERROR: ${e}`, warnings: [] };
       }
     });
-  }, [code]);
+  }, [code, storageLoaded]);
 
   return (
     <>

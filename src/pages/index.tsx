@@ -12,9 +12,9 @@ const Home: NextPage = () => {
         <title>Lebab</title>
         <meta
           name="description"
-          content="Generate lots of HTTP requests from your UI, for network monitoring or HAR exports"
+          content="Transform ES5 JavaScript into modern ES6+ code with Lebab"
         />
-        <link rel="icon" href="/public/favicon.ico" />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className={styles.main}>
@@ -24,7 +24,7 @@ const Home: NextPage = () => {
           <a href="https://github.com/lebab/lebab" target="_blank" rel="noreferrer" className={styles.footerText}>
             Lebab source code
           </a>
-          <a href="https://github.com/lebab/lebab" target="_blank" rel="noreferrer" className={styles.footerText}>
+          <a href="https://github.com/jonluca/lebabjs.com" target="_blank" rel="noreferrer" className={styles.footerText}>
             Site source code
           </a>
         </footer>
